@@ -90,7 +90,7 @@ for dictionary in departments:
     dep_spendings = list()
     for dicts in dictionary["employers"]:
         sallary = dicts["salary_rub"]
-        final_dep_spendings = dep_spendings.append(sallary)
+        dep_spendings.append(sallary)
                     
         final_dep_spendings = sum(dep_spendings)
     print(f"затраты {dictionary['title']} - {final_dep_spendings}")
