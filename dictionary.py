@@ -67,7 +67,7 @@ print(other_dep)
 for dictionary in departments:
     for dicts in dictionary["employers"]:
         print(dicts['first_name'])
-    print('___')
+    
 
 # 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
 for dictionary in departments:
