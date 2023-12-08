@@ -56,12 +56,6 @@ taxes = [
 # 1. Вывести названия всех отделов
 for dictionary in departments:
     print(f'{dictionary["title"]}')
-    for tax in taxes:
-        if (x := tax["department"]) is not None:
-            other_dep = x 
-print(other_dep)
-# вывод получился верный, но не пойму,
-# почему нет дубля "It-department", он ведь и в taxes и в departments
 
 # 2. Вывести имена всех сотрудников компании.
 for dictionary in departments:
@@ -73,8 +67,7 @@ for dictionary in departments:
 for dictionary in departments:
     for dicts in dictionary["employers"]:
         name = dicts["first_name"]
-        if name in dicts["first_name"]:
-            print(name, dictionary["title"])
+        print(name, dictionary["title"])
 
 # 4. Вывести имена всех сотрудников компании, которые получают больше 100к.
 for dictionary in departments:
@@ -92,27 +85,14 @@ for dictionary in departments:
 
 # 6 Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела 
 
-HR_dep_spendings = list()
-IT_dep_spendings = list()
+
 for dictionary in departments:
-    
+    dep_spendings = list()
     for dicts in dictionary["employers"]:
         sallary = dicts["salary_rub"]
-        if dictionary['title'] == "HR department":
-            HR_dep_spendings.append(sallary)  
-        else:
-            for tax in taxes:
-                if tax["department"] == "IT Department":
-                    tax_ = tax["value_percents"]
-                    IT_dep_spendings.append(sallary)
+        final_dep_spendings = dep_spendings.append(sallary)
                     
-final_HR_dep_spendings = sum(HR_dep_spendings)
-print(f"затраты HR - {final_HR_dep_spendings}")
-print(sum(IT_dep_spendings))
-final_IT_dep_spending = (sum(IT_dep_spendings) +
-                          ((sum(IT_dep_spendings) * tax_/100)))
-print(f"затраты IT - {final_IT_dep_spending}")
-
-# по BizDev Department мы же не можем посчитать, верно?
+        final_dep_spendings = sum(dep_spendings)
+    print(f"затраты {dictionary['title']} - {final_dep_spendings}")
 
     
