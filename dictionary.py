@@ -30,19 +30,27 @@ departments = [
     {
         "title": "HR department",
         "employers": [
-            {"first_name": "Daniel", "last_name": "Berger", "position": "Junior HR", "salary_rub": 50000},
-            {"first_name": "Michelle", "last_name": "Frey", "position": "Middle HR", "salary_rub": 75000},
-            {"first_name": "Kevin", "last_name": "Jimenez", "position": "Middle HR", "salary_rub": 70000},
-            {"first_name": "Nicole", "last_name": "Riley", "position": "HRD", "salary_rub": 120000},
+            {"first_name": "Daniel", "last_name": "Berger",
+                "position": "Junior HR", "salary_rub": 50000},
+            {"first_name": "Michelle", "last_name": "Frey",
+                "position": "Middle HR", "salary_rub": 75000},
+            {"first_name": "Kevin", "last_name": "Jimenez",
+                "position": "Middle HR", "salary_rub": 70000},
+            {"first_name": "Nicole", "last_name": "Riley",
+                "position": "HRD", "salary_rub": 120000},
         ]
     },
     {
         "title": "IT department",
         "employers": [
-            {"first_name": "Christina", "last_name": "Walker", "position": "Python dev", "salary_rub": 80000},
-            {"first_name": "Michelle", "last_name": "Gilbert", "position": "JS dev", "salary_rub": 85000},
-            {"first_name": "Caitlin", "last_name": "Bradley", "position": "Teamlead", "salary_rub": 950000},
-            {"first_name": "Brian", "last_name": "Hartman", "position": "CTO", "salary_rub": 130000},
+            {"first_name": "Christina", "last_name": "Walker",
+                "position": "Python dev", "salary_rub": 80000},
+            {"first_name": "Michelle", "last_name": "Gilbert",
+                "position": "JS dev", "salary_rub": 85000},
+            {"first_name": "Caitlin", "last_name": "Bradley",
+                "position": "Teamlead", "salary_rub": 950000},
+            {"first_name": "Brian", "last_name": "Hartman",
+                "position": "CTO", "salary_rub": 130000},
         ]
     },
 ]
@@ -61,7 +69,7 @@ for dictionary in departments:
 for dictionary in departments:
     for dicts in dictionary["employers"]:
         print(dicts['first_name'])
-    
+
 
 # 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
 for dictionary in departments:
@@ -75,15 +83,15 @@ for dictionary in departments:
         name = dicts["first_name"]
         if dicts["salary_rub"] > 100000:
             print(name)
-            
+
 # 5 Вывести позиции, на которых люди получают меньше 80к (можно с повторениями).
 for dictionary in departments:
     for dicts in dictionary["employers"]:
         position = dicts["position"]
         if dicts["salary_rub"] < 80000:
-            print(position) 
+            print(position)
 
-# 6 Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела 
+# 6 Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела
 
 
 for dictionary in departments:
@@ -91,8 +99,72 @@ for dictionary in departments:
     for dicts in dictionary["employers"]:
         sallary = dicts["salary_rub"]
         dep_spendings.append(sallary)
-                    
+
         final_dep_spendings = sum(dep_spendings)
     print(f"затраты {dictionary['title']} - {final_dep_spendings}")
 
-    
+# 7. Вывести названия отделов с указанием минимальной зарплаты в нём.
+for employers_info in departments:
+    all_sallary = list()
+    for info in employers_info["employers"]:
+        sallary = info["salary_rub"]
+        all_sallary.append(sallary)
+        minimum_sallry = min(all_sallary)
+    print(
+        f"минимальная зарплата в отделе {employers_info['title']} : {minimum_sallry}")
+
+
+# 8. Вывести названия отделов с указанием минимальной, средней и максимальной зарплаты в нём.
+ultimate_sallary = list()
+for employers_info in departments:
+    all_sallary = list()
+    for info in employers_info["employers"]:
+        sallary = info["salary_rub"]
+        all_sallary.append(sallary)
+        minimum_sallry = min(all_sallary)
+        midium_sallry = sum(all_sallary)/len(all_sallary)
+        maximum_sallary = max(all_sallary)
+    print(f"""минимальная зарплата в отделе {employers_info['title']}:{minimum_sallry},
+           средняя: {midium_sallry}, максимальная: {maximum_sallary}""")
+
+# 9. Вывести среднюю зарплату по всей компании.
+    ultimate_sallary.extend(all_sallary)
+    medium_ultimate_sallary = max(ultimate_sallary)/len(ultimate_sallary)
+print(medium_ultimate_sallary)
+# 10. Вывести названия должностей, которые получают больше 90к без повторений.
+positioin_set = set()
+for employers_info in departments:
+    for info in employers_info["employers"]:
+        position = info["position"]
+        if info["salary_rub"] > 90000:
+            positioin_set.add(position)
+
+for position_ in positioin_set:
+    print(position_)
+
+
+# 11. Посчитать среднюю зарплату по каждому отделу среди девушек
+# (их зовут Мишель, Николь, Кристина и Кейтлин).
+for employers_info in departments:
+    all_women_sallary = list()
+    for info in employers_info["employers"]:
+        sallary = info["salary_rub"]
+        name = info["first_name"]
+        if (name == "Michelle" or name == "Nicole" or name == "Caitlin"
+           or name == "Christina"):
+            all_women_sallary.append(sallary)
+            sum_all_women_sallary = sum(all_women_sallary)
+    print(f"""средняя зарплата дувушек в {employers_info['title']}
+           :{sum_all_women_sallary}""")
+
+# 12. Вывести без повторений имена людей, чьи фамилии заканчиваются на гласную букву.
+vowels_list = ["a", "e", "i", " o", "u", "y"]
+surnames_set = set()
+for employers_info in departments:
+    for info in employers_info["employers"]:
+        if info["last_name"][-1] in vowels_list:
+            surnames_set.add(info["first_name"])
+            print(surnames_set)
+
+for name_ in surnames_set:
+    print(name_)
