@@ -106,12 +106,11 @@ for dictionary in departments:
 # 7. Вывести названия отделов с указанием минимальной зарплаты в нём.
 for employers_info in departments:
     all_sallary = list()
-    for info in employers_info["employers"]:
-        sallary = info["salary_rub"]
-        all_sallary.append(sallary)
-        minimum_sallry = min(all_sallary)
-    print(
-        f"минимальная зарплата в отделе {employers_info['title']} : {minimum_sallry}")
+for info in employers_info["employers"]:
+    sallary = info["salary_rub"]
+    all_sallary.append(sallary)
+minimum_sallry = min(all_sallary)
+print(f"минимальная зарплата в отделе {employers_info['title']} : {minimum_sallry}")
 
 
 # 8. Вывести названия отделов с указанием минимальной, средней и максимальной зарплаты в нём.
@@ -121,15 +120,15 @@ for employers_info in departments:
     for info in employers_info["employers"]:
         sallary = info["salary_rub"]
         all_sallary.append(sallary)
-        minimum_sallry = min(all_sallary)
-        midium_sallry = sum(all_sallary)/len(all_sallary)
-        maximum_sallary = max(all_sallary)
+    minimum_sallry = min(all_sallary)
+    midium_sallry = sum(all_sallary)/len(all_sallary)
+    maximum_sallary = max(all_sallary)
     print(f"""минимальная зарплата в отделе {employers_info['title']}:{minimum_sallry},
            средняя: {midium_sallry}, максимальная: {maximum_sallary}""")
 
 # 9. Вывести среднюю зарплату по всей компании.
-    ultimate_sallary.extend(all_sallary)
-    medium_ultimate_sallary = max(ultimate_sallary)/len(ultimate_sallary)
+ultimate_sallary.extend(all_sallary)
+medium_ultimate_sallary = max(ultimate_sallary)/len(ultimate_sallary)
 print(medium_ultimate_sallary)
 # 10. Вывести названия должностей, которые получают больше 90к без повторений.
 positioin_set = set()
@@ -145,15 +144,15 @@ for position_ in positioin_set:
 
 # 11. Посчитать среднюю зарплату по каждому отделу среди девушек
 # (их зовут Мишель, Николь, Кристина и Кейтлин).
+WOMEN_NAMES = {"Michelle", "Nicole", "Caitlin", "Christina"}
 for employers_info in departments:
     all_women_sallary = list()
     for info in employers_info["employers"]:
         sallary = info["salary_rub"]
         name = info["first_name"]
-        if (name == "Michelle" or name == "Nicole" or name == "Caitlin"
-           or name == "Christina"):
+        if name in WOMEN_NAMES:
             all_women_sallary.append(sallary)
-            sum_all_women_sallary = sum(all_women_sallary)
+    sum_all_women_sallary = sum(all_women_sallary)
     print(f"""средняя зарплата дувушек в {employers_info['title']}
            :{sum_all_women_sallary}""")
 
@@ -164,7 +163,6 @@ for employers_info in departments:
     for info in employers_info["employers"]:
         if info["last_name"][-1] in vowels_list:
             surnames_set.add(info["first_name"])
-            print(surnames_set)
-
+            
 for name_ in surnames_set:
     print(name_)
