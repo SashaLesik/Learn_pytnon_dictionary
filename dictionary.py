@@ -191,41 +191,27 @@ print('--------------')
 
 #14. Вывести список всех сотредников с указанием зарплаты "на руки" и зарплаты с учётом налогов.
 
-sallary_per_dep = {}
+
 for employers_info in departments:
-    all_sallary = list()
-    total_lis_of_emp = []
+    sallary_per_dep = {}
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
-        sallary = info["salary_rub"]
-        total_lis_of_emp.append((surname, name))
-        all_sallary.append(sallary)
-    all_sallary_sum = sum(all_sallary)
-    department_name = employers_info['title'].strip(" department")
-    sallary_per_dep[department_name] = (all_sallary_sum, total_lis_of_emp)
-for dep in sallary_per_dep.keys():
-    taxes_per_dep =[]
-    for tax in taxes:
-        if tax["department"] is None:
-            total_tax_for_all_dep = (int(tax["value_percents"]) /100) * (sallary_per_dep[dep][0])
-            taxes_per_dep.append(total_tax_for_all_dep)
+        sallary_gross = info["salary_rub"]
+        department_name = employers_info["title"]
+        sallary_per_dep[(name, surname)] = (department_name, sallary_gross)
+    #print(sallary_per_dep)
+    for name_surname, dep_sallary in sallary_per_dep.items():
+        taxes_per_dep = 0
+        for tax in taxes:
+            if tax["department"] is None or dep_sallary[0].lower() == tax["department"].lower():
+                taxes_per_dep += int(tax["value_percents"])
+                netto = dep_sallary[1] - (dep_sallary[1] * taxes_per_dep/100)
+                
+                print(f' {name_surname}, {dep_sallary}, зп нетто: {netto}')
 
-        else:  # tax["department"] is not None 
-            if str(dep) in str(tax["department"].strip(" Department")): # IT
-                total_tax = ((sallary_per_dep[dep][0]) * int(tax["value_percents"]) / 100)
-                taxes_per_dep.append(total_tax)
-                netto = all_sallary_sum - sum(taxes_per_dep)
-                print(f'''({dep}, {total_lis_of_emp},
-                      gross: {sallary_per_dep[dep]}, netto: ({netto}))''')
-            elif tax["department"] == "BizDev Department":
-                print("-")
-            else:
-                netto = all_sallary_sum - sum(taxes_per_dep)
-                print(f'''({dep}, {total_lis_of_emp},
-                      gross: {sallary_per_dep[dep]}, netto: ({netto}))''')
 
-        
+    
 
     
         
