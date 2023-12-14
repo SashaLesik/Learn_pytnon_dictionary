@@ -166,3 +166,135 @@ for employers_info in departments:
             
 for name_ in surnames_set:
     print(name_)
+
+#13. Вывести список отделов со средним налогом на сотрудников этого отдела.
+
+for employers_info in departments:
+    department_name = employers_info['title']
+    for tax in taxes:
+        if department_name == "HR department":
+            if tax["department"] is None:
+                total_tax = tax["value_percents"]
+                print(department_name, total_tax)
+        if department_name == "IT department":
+            if tax["department"] == None:
+                total_tax_for_all = tax["value_percents"]
+            else:
+                if tax["department"] == "IT Department":
+                    total_tax = total_tax_for_all + tax["value_percents"]
+                    print(department_name, total_tax)
+                else:
+                    department_name = "BizDev Department"
+                    total_tax = total_tax_for_all + tax["value_percents"]
+                    print(department_name, total_tax)
+print('--------------')
+
+#14. Вывести список всех сотредников с указанием зарплаты "на руки" и зарплаты с учётом налогов.
+
+
+for employers_info in departments:
+    sallary_per_dep = {}
+    for info in employers_info["employers"]:
+        name = info["first_name"]
+        surname = info["last_name"]
+        sallary_gross = info["salary_rub"]
+        department_name = employers_info["title"]
+        sallary_per_dep[(name, surname)] = (department_name, sallary_gross)
+    #print(sallary_per_dep)
+    for name_surname, dep_sallary in sallary_per_dep.items():
+        taxes_per_dep = 0
+        for tax in taxes:
+            if tax["department"] is None or dep_sallary[0].lower() == tax["department"].lower():
+                taxes_per_dep += int(tax["value_percents"])
+                netto = dep_sallary[1] - (dep_sallary[1] * taxes_per_dep/100)
+                
+                print(f' {name_surname}, {dep_sallary}, зп нетто: {netto}')
+
+
+    
+
+    
+        
+        
+        
+
+
+
+
+# 15. Вывести список отделов, отсортированный по месячной налоговой нагрузки.
+# all_taxes = {}
+# for employers_info in departments:
+#     department_name = employers_info['title']
+#     for tax in taxes:
+#         if department_name == "HR department":
+#             if tax["department"] is None:
+#                 total_tax = tax["value_percents"]
+#                 all_taxes[department_name] = total_tax
+
+#         if department_name == "IT department":
+#             if tax["department"] == None:
+#                 total_tax_for_all = tax["value_percents"]
+#             else:
+#                 if tax["department"] == "IT Department":
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     all_taxes[department_name] = total_tax
+#                 else:
+#                     department_name = "BizDev Department"
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     all_taxes[department_name] = total_tax
+# all_taxes = sorted(all_taxes.items(), key=lambda item: item[1])
+# print(all_taxes)
+
+# # 16. Вывести всех сотрудников, за которых компания платит больше 100к налогов в год.
+# for employers_info in departments:
+#     department_name = employers_info['title']
+#     for tax in taxes:
+#         if department_name == "HR department":
+#             if tax["department"] == None:
+#                 total_tax = tax["value_percents"]
+#                 for info in employers_info["employers"]:
+#                     if ((int(info["salary_rub"]) * int(total_tax)/100)*12
+#                         > 100000):
+#                         print(info['first_name'])
+                
+#         if department_name == "IT department":
+#             if tax["department"] is None:
+#                 total_tax_for_all = tax["value_percents"]
+                
+#             else:
+#                 if tax["department"] == "IT Department":
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     for info in employers_info["employers"]:
+#                         if int(info["salary_rub"]) * int(total_tax)/100 > 100000:
+#                             print(info['first_name'])
+
+# #17. Вывести имя и фамилию сотрудника, за которого компания платит меньше всего налогов.
+# taxes_of_all_emp = {}
+# for employers_info in departments:
+#     department_name = employers_info['title']
+#     for tax in taxes:
+#         if department_name == "HR department":
+#             if tax["department"] == None:
+#                 total_tax = tax["value_percents"]
+#                 for info in employers_info["employers"]:
+#                     tax_per_person = ((int(info["salary_rub"]) * int(total_tax)/
+#                                        100)*12)
+#                     taxes_of_all_emp[(info['first_name'], info['last_name'])] = tax_per_person
+                          
+#         if department_name == "IT department":
+#             if tax["department"] is None:
+#                 total_tax_for_all = tax["value_percents"]
+                
+#             else:
+#                 if tax["department"] == "IT Department":
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     for info in employers_info["employers"]:
+#                         tax_per_person = ((int(info["salary_rub"]) * int(total_tax)/
+#                                            100)*12)
+#                     taxes_of_all_emp[(info['first_name'], info['last_name'])] = tax_per_person
+
+# taxes_of_all_emp = sorted(taxes_of_all_emp.items(), key=lambda item: item[1])
+# print(f'компания платит меньше всего налогов за {taxes_of_all_emp[0][0]}')
+
+    
+
