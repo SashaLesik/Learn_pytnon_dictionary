@@ -191,35 +191,36 @@ taxes = [
 
 #14. Вывести список всех сотредников с указанием зарплаты "на руки" и зарплаты с учётом налогов.
 
+def define_tax_for_dep_name(taxes: list[dict], dep_name: str) -> int:
+    taxes_per_dep = 0
+    for tax in taxes:
+        if tax["department"] is None or dep_name.lower() == tax["department"].lower():
+            taxes_per_dep += int(tax["value_percents"])
+
+        return taxes_per_dep
+
 
 for employers_info in departments:
     sallary_per_dep = {}
+    taxes_per_dep = define_tax_for_dep_name(taxes, employers_info['title'])
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
         sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-
-        def define_tax_for_dep_name(taxes: list[dict], dep_name: str) -> int:
-            taxes_per_dep = 0
-            for tax in taxes:
-                if tax["department"] is None or dep_name.lower() == tax["department"].lower():
-                    taxes_per_dep += int(tax["value_percents"])
-
-                return taxes_per_dep
-
-        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
+        
         netto = sallary_per_dep[departments_name][2] - (sallary_per_dep[departments_name][2] * taxes_per_dep/100)
                     
         print(f'{departments_name}, {sallary_per_dep[departments_name][0]}, {sallary_per_dep[departments_name][1]}, {sallary_per_dep[departments_name][2]}, зп нетто: {netto}')
+print("------14i")
 
-
-# # 15. Вывести список отделов, отсортированный по месячной налоговой нагрузки.
+# # # 15. Вывести список отделов, отсортированный по месячной налоговой нагрузки.
 for employers_info in departments:
     sallary_per_dep = {}
     sallary_sum =[]
     all_taxes = {}
+    taxes_per_dep = define_tax_for_dep_name(taxes, employers_info['title'])
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
@@ -228,49 +229,45 @@ for employers_info in departments:
         sallary_sum.append(sallary_gross)
     sallary_sum = sum(sallary_sum)
     sallary_per_dep[departments_name] = sallary_sum
-    taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
     
     taxes_per_dep_final = (int(sallary_per_dep[departments_name])
                                  * (int(taxes_per_dep)/100))
     all_taxes[departments_name] = taxes_per_dep_final
                
     print(f'{all_taxes}')
-    print("------")
+print("-----15i-")
 
 
-# # # 16. Вывести всех сотрудников, за которых компания платит больше 100к налогов в год.
+# # # # 16. Вывести всех сотрудников, за которых компания платит больше 100к налогов в год.
 for employers_info in departments:
     sallary_per_dep = {}
+    taxes_per_dep = define_tax_for_dep_name(taxes, employers_info['title'])
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
         sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
-
         tax_per_person = sallary_per_dep[departments_name][2] * (taxes_per_dep/100)
         if tax_per_person > 100000:
             print((sallary_per_dep[departments_name][0],
-                        sallary_per_dep[departments_name][1]))
-            print("------")
+                  sallary_per_dep[departments_name][1]))
+            print("-----16i-")
 
 
-# # #17. Вывести имя и фамилию сотрудника, за которого компания платит меньше всего налогов.
-# # 
+# # # #17. Вывести имя и фамилию сотрудника, за которого компания платит меньше всего налогов.
+# # # 
 tax_per_person_dict = {}
 
 for employers_info in departments:
     sallary_per_dep = {}
-    
+    taxes_per_dep = define_tax_for_dep_name(taxes, employers_info['title'])
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
-        sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
-     
+        sallary_per_dep[departments_name] = (name, surname, sallary_gross)     
         tax_per_person = sallary_per_dep[departments_name][2] * (taxes_per_dep/100)
         name_ = sallary_per_dep[departments_name][0]
         surname_ = sallary_per_dep[departments_name][1]
