@@ -61,133 +61,133 @@ taxes = [
     {"department": "BizDev Department", "name": "sales", "value_percents": 20},
 ]
 
-# 1. Вывести названия всех отделов
-for dictionary in departments:
-    print(f'{dictionary["title"]}')
+# # 1. Вывести названия всех отделов
+# for dictionary in departments:
+#     print(f'{dictionary["title"]}')
 
-# 2. Вывести имена всех сотрудников компании.
-for dictionary in departments:
-    for dicts in dictionary["employers"]:
-        print(dicts['first_name'])
-
-
-# 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
-for dictionary in departments:
-    for dicts in dictionary["employers"]:
-        name = dicts["first_name"]
-        print(name, dictionary["title"])
-
-# 4. Вывести имена всех сотрудников компании, которые получают больше 100к.
-for dictionary in departments:
-    for dicts in dictionary["employers"]:
-        name = dicts["first_name"]
-        if dicts["salary_rub"] > 100000:
-            print(name)
-
-# 5 Вывести позиции, на которых люди получают меньше 80к (можно с повторениями).
-for dictionary in departments:
-    for dicts in dictionary["employers"]:
-        position = dicts["position"]
-        if dicts["salary_rub"] < 80000:
-            print(position)
-
-# 6 Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела
+# # 2. Вывести имена всех сотрудников компании.
+# for dictionary in departments:
+#     for dicts in dictionary["employers"]:
+#         print(dicts['first_name'])
 
 
-for dictionary in departments:
-    dep_spendings = list()
-    for dicts in dictionary["employers"]:
-        sallary = dicts["salary_rub"]
-        dep_spendings.append(sallary)
+# # 3. Вывести имена всех сотрудников компании с указанием отдела, в котором они работают.
+# for dictionary in departments:
+#     for dicts in dictionary["employers"]:
+#         name = dicts["first_name"]
+#         print(name, dictionary["title"])
 
-        final_dep_spendings = sum(dep_spendings)
-    print(f"затраты {dictionary['title']} - {final_dep_spendings}")
+# # 4. Вывести имена всех сотрудников компании, которые получают больше 100к.
+# for dictionary in departments:
+#     for dicts in dictionary["employers"]:
+#         name = dicts["first_name"]
+#         if dicts["salary_rub"] > 100000:
+#             print(name)
 
-# 7. Вывести названия отделов с указанием минимальной зарплаты в нём.
-for employers_info in departments:
-    all_sallary = list()
-for info in employers_info["employers"]:
-    sallary = info["salary_rub"]
-    all_sallary.append(sallary)
-minimum_sallry = min(all_sallary)
-print(f"минимальная зарплата в отделе {employers_info['title']} : {minimum_sallry}")
+# # 5 Вывести позиции, на которых люди получают меньше 80к (можно с повторениями).
+# for dictionary in departments:
+#     for dicts in dictionary["employers"]:
+#         position = dicts["position"]
+#         if dicts["salary_rub"] < 80000:
+#             print(position)
 
-
-# 8. Вывести названия отделов с указанием минимальной, средней и максимальной зарплаты в нём.
-ultimate_sallary = list()
-for employers_info in departments:
-    all_sallary = list()
-    for info in employers_info["employers"]:
-        sallary = info["salary_rub"]
-        all_sallary.append(sallary)
-    minimum_sallry = min(all_sallary)
-    midium_sallry = sum(all_sallary)/len(all_sallary)
-    maximum_sallary = max(all_sallary)
-    print(f"""минимальная зарплата в отделе {employers_info['title']}:{minimum_sallry},
-           средняя: {midium_sallry}, максимальная: {maximum_sallary}""")
-
-# 9. Вывести среднюю зарплату по всей компании.
-ultimate_sallary.extend(all_sallary)
-medium_ultimate_sallary = max(ultimate_sallary)/len(ultimate_sallary)
-print(medium_ultimate_sallary)
-# 10. Вывести названия должностей, которые получают больше 90к без повторений.
-positioin_set = set()
-for employers_info in departments:
-    for info in employers_info["employers"]:
-        position = info["position"]
-        if info["salary_rub"] > 90000:
-            positioin_set.add(position)
-
-for position_ in positioin_set:
-    print(position_)
+# # 6 Посчитать, сколько денег в месяц уходит на каждый отдел – и вывести вместе с названием отдела
 
 
-# 11. Посчитать среднюю зарплату по каждому отделу среди девушек
-# (их зовут Мишель, Николь, Кристина и Кейтлин).
-WOMEN_NAMES = {"Michelle", "Nicole", "Caitlin", "Christina"}
-for employers_info in departments:
-    all_women_sallary = list()
-    for info in employers_info["employers"]:
-        sallary = info["salary_rub"]
-        name = info["first_name"]
-        if name in WOMEN_NAMES:
-            all_women_sallary.append(sallary)
-    sum_all_women_sallary = sum(all_women_sallary)
-    print(f"""средняя зарплата дувушек в {employers_info['title']}
-           :{sum_all_women_sallary}""")
+# for dictionary in departments:
+#     dep_spendings = list()
+#     for dicts in dictionary["employers"]:
+#         sallary = dicts["salary_rub"]
+#         dep_spendings.append(sallary)
 
-# 12. Вывести без повторений имена людей, чьи фамилии заканчиваются на гласную букву.
-vowels_list = ["a", "e", "i", " o", "u", "y"]
-surnames_set = set()
-for employers_info in departments:
-    for info in employers_info["employers"]:
-        if info["last_name"][-1] in vowels_list:
-            surnames_set.add(info["first_name"])
+#         final_dep_spendings = sum(dep_spendings)
+#     print(f"затраты {dictionary['title']} - {final_dep_spendings}")
+
+# # 7. Вывести названия отделов с указанием минимальной зарплаты в нём.
+# for employers_info in departments:
+#     all_sallary = list()
+# for info in employers_info["employers"]:
+#     sallary = info["salary_rub"]
+#     all_sallary.append(sallary)
+# minimum_sallry = min(all_sallary)
+# print(f"минимальная зарплата в отделе {employers_info['title']} : {minimum_sallry}")
+
+
+# # 8. Вывести названия отделов с указанием минимальной, средней и максимальной зарплаты в нём.
+# ultimate_sallary = list()
+# for employers_info in departments:
+#     all_sallary = list()
+#     for info in employers_info["employers"]:
+#         sallary = info["salary_rub"]
+#         all_sallary.append(sallary)
+#     minimum_sallry = min(all_sallary)
+#     midium_sallry = sum(all_sallary)/len(all_sallary)
+#     maximum_sallary = max(all_sallary)
+#     print(f"""минимальная зарплата в отделе {employers_info['title']}:{minimum_sallry},
+#            средняя: {midium_sallry}, максимальная: {maximum_sallary}""")
+
+# # 9. Вывести среднюю зарплату по всей компании.
+# ultimate_sallary.extend(all_sallary)
+# medium_ultimate_sallary = max(ultimate_sallary)/len(ultimate_sallary)
+# print(medium_ultimate_sallary)
+# # 10. Вывести названия должностей, которые получают больше 90к без повторений.
+# positioin_set = set()
+# for employers_info in departments:
+#     for info in employers_info["employers"]:
+#         position = info["position"]
+#         if info["salary_rub"] > 90000:
+#             positioin_set.add(position)
+
+# for position_ in positioin_set:
+#     print(position_)
+
+
+# # 11. Посчитать среднюю зарплату по каждому отделу среди девушек
+# # (их зовут Мишель, Николь, Кристина и Кейтлин).
+# WOMEN_NAMES = {"Michelle", "Nicole", "Caitlin", "Christina"}
+# for employers_info in departments:
+#     all_women_sallary = list()
+#     for info in employers_info["employers"]:
+#         sallary = info["salary_rub"]
+#         name = info["first_name"]
+#         if name in WOMEN_NAMES:
+#             all_women_sallary.append(sallary)
+#     sum_all_women_sallary = sum(all_women_sallary)
+#     print(f"""средняя зарплата дувушек в {employers_info['title']}
+#            :{sum_all_women_sallary}""")
+
+# # 12. Вывести без повторений имена людей, чьи фамилии заканчиваются на гласную букву.
+# vowels_list = ["a", "e", "i", " o", "u", "y"]
+# surnames_set = set()
+# for employers_info in departments:
+#     for info in employers_info["employers"]:
+#         if info["last_name"][-1] in vowels_list:
+#             surnames_set.add(info["first_name"])
             
-for name_ in surnames_set:
-    print(name_)
+# for name_ in surnames_set:
+#     print(name_)
 
-#13. Вывести список отделов со средним налогом на сотрудников этого отдела.
+# #13. Вывести список отделов со средним налогом на сотрудников этого отдела.
 
-for employers_info in departments:
-    department_name = employers_info['title']
-    for tax in taxes:
-        if department_name == "HR department":
-            if tax["department"] is None:
-                total_tax = tax["value_percents"]
-                print(department_name, total_tax)
-        if department_name == "IT department":
-            if tax["department"] == None:
-                total_tax_for_all = tax["value_percents"]
-            else:
-                if tax["department"] == "IT Department":
-                    total_tax = total_tax_for_all + tax["value_percents"]
-                    print(department_name, total_tax)
-                else:
-                    department_name = "BizDev Department"
-                    total_tax = total_tax_for_all + tax["value_percents"]
-                    print(department_name, total_tax)
-print('--------------')
+# for employers_info in departments:
+#     department_name = employers_info['title']
+#     for tax in taxes:
+#         if department_name == "HR department":
+#             if tax["department"] is None:
+#                 total_tax = tax["value_percents"]
+#                 print(department_name, total_tax)
+#         if department_name == "IT department":
+#             if tax["department"] == None:
+#                 total_tax_for_all = tax["value_percents"]
+#             else:
+#                 if tax["department"] == "IT Department":
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     print(department_name, total_tax)
+#                 else:
+#                     department_name = "BizDev Department"
+#                     total_tax = total_tax_for_all + tax["value_percents"]
+#                     print(department_name, total_tax)
+# print('--------------')
 
 #14. Вывести список всех сотредников с указанием зарплаты "на руки" и зарплаты с учётом налогов.
 
@@ -200,21 +200,26 @@ for employers_info in departments:
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
         sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-        #print(sallary_per_dep)
-        for department_name in sallary_per_dep.keys():
+
+        def define_tax_for_dep_name(taxes: list[dict], dep_name: str) -> int:
             taxes_per_dep = 0
             for tax in taxes:
-                if tax["department"] is None or departments_name.lower() == tax["department"].lower():
+                if tax["department"] is None or dep_name.lower() == tax["department"].lower():
                     taxes_per_dep += int(tax["value_percents"])
-                    netto = sallary_per_dep[department_name][2] - (sallary_per_dep[department_name][2] * taxes_per_dep/100)
+
+                return taxes_per_dep
+
+        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
+        netto = sallary_per_dep[departments_name][2] - (sallary_per_dep[departments_name][2] * taxes_per_dep/100)
                     
-            print(f'{department_name}, {sallary_per_dep[department_name][0]}, {sallary_per_dep[department_name][1]}, {sallary_per_dep[department_name][2]}, зп нетто: {netto}')
+        print(f'{departments_name}, {sallary_per_dep[departments_name][0]}, {sallary_per_dep[departments_name][1]}, {sallary_per_dep[departments_name][2]}, зп нетто: {netto}')
 
 
-# 15. Вывести список отделов, отсортированный по месячной налоговой нагрузки.
+# # 15. Вывести список отделов, отсортированный по месячной налоговой нагрузки.
 for employers_info in departments:
     sallary_per_dep = {}
     sallary_sum =[]
+    all_taxes = {}
     for info in employers_info["employers"]:
         name = info["first_name"]
         surname = info["last_name"]
@@ -223,24 +228,17 @@ for employers_info in departments:
         sallary_sum.append(sallary_gross)
     sallary_sum = sum(sallary_sum)
     sallary_per_dep[departments_name] = sallary_sum
-
-    for department_name in sallary_per_dep.keys():
-        taxes_per_dep = 0
-        taxes_per_dep_final = 0
-        all_taxes = {}
-        for tax in taxes:
-            
-            if tax["department"] is None or department_name.lower() == tax["department"].lower():
-                taxes_per_dep += int(tax["value_percents"])
-                taxes_per_dep_final = (int(sallary_per_dep[department_name])
+    taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
+    
+    taxes_per_dep_final = (int(sallary_per_dep[departments_name])
                                  * (int(taxes_per_dep)/100))
-                all_taxes[department_name] = taxes_per_dep_final
+    all_taxes[departments_name] = taxes_per_dep_final
                
-        print(f'{all_taxes}')
-        print("------")
+    print(f'{all_taxes}')
+    print("------")
 
 
-# # 16. Вывести всех сотрудников, за которых компания платит больше 100к налогов в год.
+# # # 16. Вывести всех сотрудников, за которых компания платит больше 100к налогов в год.
 for employers_info in departments:
     sallary_per_dep = {}
     for info in employers_info["employers"]:
@@ -249,20 +247,17 @@ for employers_info in departments:
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
         sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-        for department_name in sallary_per_dep.keys():
-            taxes_per_dep = 0
-            for tax in taxes:
-                if tax["department"] is None or departments_name.lower() == tax["department"].lower():
-                    taxes_per_dep += int(tax["value_percents"])
-                    tax_per_person = sallary_per_dep[department_name][2] * (taxes_per_dep/100)
-            if tax_per_person > 100000:
-                print((sallary_per_dep[department_name][0],
-                        sallary_per_dep[department_name][1]))
-                print("------")
+        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
+
+        tax_per_person = sallary_per_dep[departments_name][2] * (taxes_per_dep/100)
+        if tax_per_person > 100000:
+            print((sallary_per_dep[departments_name][0],
+                        sallary_per_dep[departments_name][1]))
+            print("------")
 
 
-# #17. Вывести имя и фамилию сотрудника, за которого компания платит меньше всего налогов.
-# 
+# # #17. Вывести имя и фамилию сотрудника, за которого компания платит меньше всего налогов.
+# # 
 tax_per_person_dict = {}
 
 for employers_info in departments:
@@ -274,17 +269,12 @@ for employers_info in departments:
         sallary_gross = info["salary_rub"]
         departments_name = employers_info["title"]
         sallary_per_dep[departments_name] = (name, surname, sallary_gross)
-        
-        for department_name in sallary_per_dep.keys():
-            taxes_per_dep = 0
-            
-            for tax in taxes:
-                if tax["department"] is None or departments_name.lower() == tax["department"].lower():
-                    taxes_per_dep += int(tax["value_percents"])
-                    tax_per_person = sallary_per_dep[department_name][2] * (taxes_per_dep/100)
-                    name_ = sallary_per_dep[department_name][0]
-                    surname_ = sallary_per_dep[department_name][1]
-                    tax_per_person_dict[name, surname_] = tax_per_person
+        taxes_per_dep = define_tax_for_dep_name(taxes, departments_name)
+     
+        tax_per_person = sallary_per_dep[departments_name][2] * (taxes_per_dep/100)
+        name_ = sallary_per_dep[departments_name][0]
+        surname_ = sallary_per_dep[departments_name][1]
+        tax_per_person_dict[name, surname_] = tax_per_person
             
 sallary_range = []
 for name_surname_, sallary_in_dict in tax_per_person_dict.items():
